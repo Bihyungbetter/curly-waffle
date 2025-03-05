@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu | Time For Thyme</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+    <style>
+        .menu-section {
+            padding: 8rem 0 6rem;
+        }
+        
+        .menu-section:nth-child(even) {
+            background-color: var(--gray-color);
+        }
+        
+        .menu-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .menu-header h1 {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .menu-header p {
+            font-size: 1.2rem;
+            color: var(--dark-gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .menu-category {
+            margin-bottom: 4rem;
+        }
+        
+        .category-title {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+        
+        .category-title h2 {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            display: inline-block;
+            padding: 0 2rem;
+            background-color: inherit;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .category-title::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background-color: var(--border-color);
+            z-index: 0;
+        }
+        
+        .menu-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .menu-item {
+            display: flex;
+            padding: 1.5rem;
+            background-color: var(--light-color);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .menu-item-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+            margin-right: 1.5rem;
+            border: 3px solid var(--primary-color);
+        }
+        
+        .menu-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .menu-item:hover .menu-item-image img {
+            transform: scale(1.1);
+        }
+        
+        .menu-item-content {
+            flex: 1;
+        }
+        
+        .menu-item-top {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+        
+        .menu-item-title {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 0;
+        }
+        
+        .menu-item-price {
+            font-weight: 600;
+            color: var(--accent-color);
+            font-size: 1.1rem;
+        }
+        
+        .menu-item-description {
+            color: var(--dark-gray);
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .menu-item-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .menu-tag {
+            display: inline-block;
+            font-size: 0.8rem;
+            padding: 0.2rem 0.7rem;
+            border-radius: 20px;
+            background-color: rgba(44, 94, 67, 0.1);
+            color: var(--primary-color);
+        }
+        
+        .menu-tag.spicy {
+            background-color: rgba(244, 125, 79, 0.1);
+            color: var(--accent-color);
+        }
+        
+        .menu-tag.popular {
+            background-color: rgba(251, 186, 114, 0.2);
+            color: #d17f1a;
+        }
+        
+        .menu-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+        
+        .menu-filter {
+            padding: 0.5rem 1.5rem;
+            background-color: var(--light-color);
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+        
+        .menu-filter.active {
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            border-color: var(--primary-color);
+        }
+        
+        .menu-filter:hover {
+            background-color: rgba(44, 94, 67, 0.1);
+        }
+        
+        .menu-filter.active:hover {
+            background-color: var(--primary-color);
+        }
+        
+        @media screen and (max-width: 768px) {
+            .menu-items {
+                grid-template-columns: 1fr;
+            }
+            
+            .menu-item {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .menu-item-image {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+            
+            .menu-item-top {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">Time For Thyme</a>
+                </div>
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a href="menu.html" class="nav-link active">Menu</a></li>
+                        <li class="nav-item"><a href="index.html#about" class="nav-link">Our Story</a></li>
+                        <li class="nav-item"><a href="index.html#sustainability" class="nav-link">Sustainability</a></li>
+                        <li class="nav-item"><a href="index.html#contact" class="nav-link">Contact</a></li>
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link">TSA Webmaster <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="tsa-webmaster.html#work-log">Work Log</a></li>
+                                <li><a href="tsa-webmaster.html#copyright">Student Copyright Checklist</a></li>
+                                <li><a href="tsa-webmaster.html#reference">Reference Page</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="mobile-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="menu-section">
+            <div class="container">
+                <div class="menu-header" data-aos="fade-up">
+                    <h1>Our Menu</h1>
+                    <div class="section-divider"></div>
+                    <p>Discover our diverse selection of plant-based Asian-inspired dishes, prepared with locally-sourced ingredients and traditional techniques.</p>
+                </div>
+                
+                <div class="menu-filters" data-aos="fade-up" data-aos-delay="100">
+                    <div class="menu-filter active" data-category="all">All</div>
+                    <div class="menu-filter" data-category="starters">Starters</div>
+                    <div class="menu-filter" data-category="mains">Main Courses</div>
+                    <div class="menu-filter" data-category="soups">Soups & Noodles</div>
+                    <div class="menu-filter" data-category="desserts">Desserts</div>
+                    <div class="menu-filter" data-category="drinks">Drinks</div>
+                </div>
+                
+                <div class="menu-category starters" data-aos="fade-up" data-aos-delay="200">
+                    <div class="category-title">
+                        <h2>Starters</h2>
+                    </div>
+                    
+                    <div class="menu-items">
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="100">
+                            <div class="menu-item-image">
+                                <img src="images/mushroom-dumplings.jpg" alt="Mushroom Dumplings">
+                            </div>
+                            <div class="menu-item-content">
+                                <div class="menu-item-top">
+                                    <h3 class="menu-item-title">Mushroom Dumplings</h3>
+                                    <div class="menu-item-price">$12</div>
+                                </div>
+                                <p class="menu-item-description">Steamed dumplings filled with shiitake mushrooms, cabbage, and fresh herbs. Served with a ginger-soy dipping sauce.</p>
+                                <div class="menu-item-tags">
+                                    <span class="menu-tag popular">Popular</span>
+                                    <span class="menu-tag">Gluten-Free Option</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="200">
+                            <div class="menu-item-image">
+                                <img src="images/summer-rolls.jpg" alt="Summer Rolls">
+                            </div>
+                            <div class="menu-item-content">
+                                <div class="menu-item-top">
+                                    <h3 class="menu-item-title">Summer Rolls</h3>
+                                    <div class="menu-item-price">$10</div>
+                                </div>
+                                <p class="menu-item-description">Rice paper rolls with fresh vegetables, herbs, rice noodles, and crispy tofu. Served with a spicy peanut dipping sauce.</p>
+                                <div class="menu-item-tags">
+                                    <span class="menu-tag">Gluten-Free</span>
+                                    <span class="menu-tag">Raw Option</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="300">
+                            <div class="menu-item-image">
+                                <img src="images/crispy-tofu.jpg" alt="Crispy Salt & Pepper Tofu">
+                            </div>
+                            <div class="menu-item-content">
+                                <div class="menu-item-top">
+                                    <h3 class="menu-item-title">Salt & Pepper Tofu</h3>
+                                    <div class="menu-item-price">$11</div>
+                                </div>
+                                <p class="menu-item-description">Crispy tofu cubes tossed in aromatic salt, pepper, and five-spice blend. Served with a sweet chili dipping sauce.</p>
+                                <div class="menu-item-tags">
+                                    <span class="menu-tag spicy">Spicy</span>
+                                    <span class="menu-tag">Gluten-Free Option</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="400">
+                            <div class="menu-item-image">
+                                <img src="images/edamame.jpg" alt="Garlic Chili Edamame">
+                            </div>
+                            <div class="menu-item-content">
+                                <div class="menu-item-top">
+                                    <h3 class="menu-item-title">Garlic Chili Edamame</h3>
+                                    <div class="menu-item-price">$8</div>
+                                </div>
+                                <p class="menu-item-description">Steamed edamame pods sautéed with garlic, chili flakes, and a hint of lemon. Finished with sea salt.</p>
+                                <div class="menu-item-tags">
+                                    <span class="menu-tag">Gluten-Free</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-category mains" data-aos="fade-up" data-aos-delay="200">
+                    <div class="category-title">
+                        <h2>Main Courses</h2>
+                    </div>
+                    
+                    <div class="menu-items">
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="100">
+                            <div class="menu-item-image">
+                                <img src="images/lemongrass-tofu.jpg" alt="Lemongrass Tofu Stir-Fry">
+                            </div>
+                            <div class="menu-item-content">
+                                <div class="menu-item-top">
+                                    <h3 class="menu-item-title">Lemongrass Tofu Stir-Fry</h3>
+                                    <div class="menu-item-price">$16</div>
+                                </div>
+                                <p class="menu-item-description">Crispy tofu with lemongrass, bell peppers, snow peas, and Thai basil in a savory sauce. Served with jasmine rice.</p>
+                                <div class="menu-item-tags">
+                                    <span class="menu-tag popular">Signature Dish</span>
+                                    <span class="menu-tag spicy">Mild Spice</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="200">
+                            <div class="menu-item-image">
+                                <img src="images/green-curry.jpg" alt="Coconut Green Curry">
+                            </div>
+                            <div class="menu-item-content">
+                                <div class="menu-item-top">
+                                    <h3 class="menu-item-title">Coconut Green Curry</h3>
+                                    <div class="menu-item-price">$18</div>
+                                </div>
+                                <p class="menu-item-description">Seasonal vegetables in a rich coconut milk curry with aromatic herbs, bamboo shoots, and tofu. Served with jasmine rice.</p>
+                                <div class="menu-item-tags">
+                                    <span class="menu-tag popular">Popular</span>
+                                    <span class="menu-tag spicy">Adjustable Spice</span>
+                                    <span class="menu-tag">Gluten-Free</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="300">
+                            <div class="menu-item-image">
+                                <img src="images/buddha-bowl.jpg" alt="Buddha's Delight Bowl">
+                            </div>
+                            <div class="menu-item-content">
+                                <div class="menu-item-top">
+                                    <h3 class="menu-item-title">Buddha's Delight Bowl</h3>
+                                    <div class="menu-item-price">$17</div>
+                                </div>
+                                <p class="menu-item-description">A colorful assortment of stir-fried vegetables with crispy tempeh in a ginger-garlic sauce. Served over brown rice with pickled vegetables.</p>
+                                <div class="menu-item-tags">
+                                    <span class="menu-tag">Gluten-Free Option</span>
+                                    <span class="menu-tag">High Protein</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="400">
+                            <div class="menu-item-image">
+                                <img src="images/szechuan-eggplant.jpg" alt="Szechuan Eggplant">
+                            </div>
+                            <div class="menu-item-content">
+                                <div class="menu-item-top">
+                                    <h3 class="menu-item-title">Szechuan Eggplant</h3>
+                                    <div class="menu-item-price">$15</div>
+                                </div>
+                                <p class="menu-item-description">Silky eggplant in a spicy, garlicky Szechuan sauce with scallions and sesame seeds. Served with steamed rice.</p>
+                                <div class="menu-item-tags">
+                                    <span class="menu-tag spicy">Spicy</span>
+                                    <span class="menu-tag">Gluten-Free Option</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-category soups" data-aos="fade-up" data-aos-delay="200">
+                    <div class="category-title">
+                        <h2>Soups & Noodles</h2>
+                    </div>
+                    
+                    <div class="menu-items">
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="100">
+                            <div class="menu-item-image">
+                                <img src="images/pho.jpg" alt="Aromatic Pho">
+                            </div>
+                            <div class="menu-item-content">
+                                <div class="menu-item-top">
+                                    <h3 class="menu-item-title">Aromatic Pho</h3>
+                                    <div class="menu-item-price">$14</div>
+                                </div>
+                                <p class="menu-item-description">Rice noodles in a fragrant vegetable broth with bok choy, mushrooms, and tofu. Served with bean sprouts, herbs, and lime.</p>
+                                <div class="menu-item-tags">
+                                    <span class="menu-tag">Gluten-Free</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="200">
+                            <div class="menu-item-image">
+                                <img src="images/pad-thai.jpg" alt="Classic Pad Thai">
+                            </div>
+                            <div class="menu-item-content">
+                                <div class="menu-item-top">
+                                    <h3 class="menu-item-title">Classic Pad Thai</h3>
+                                    <div class="menu-item-price">$16</div>
+                                </div>
+                                <p class="menu-item-description">Rice noodles stir-fried with tofu, bean sprouts, and scallions in a tangy tamarind sauce. Topped with crushed peanuts and lime.</p>
+                                <div class="menu-item-tags">
+                                    <span class="menu-tag popular">Popular</span>
+                                    <span class="menu-tag">Gluten-Free Option</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="300">
+                            <div class="menu-item-image">
+                                <img src="images/ramen.jpg" alt="Spicy Miso Ramen">
+                            </div>
+                            <div class="menu-item-content">
+                                <div class="menu-item-top">
+                                    <h3 class="menu-item-title">Spicy Miso Ramen</h3>
+                                    <div class="menu-item-price">$15</div>
+                                </div>
+                                <p class="menu-item-description">Wheat noodles in a rich, spicy miso broth with tofu, corn, bamboo shoots, and green onions. Topped with nori and sesame seeds.</p>
+                                <div class="menu-item-tags">
+                                    <span class="menu-tag spicy">Spicy</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="400">
+                            <div class="menu-item-image">
+                                <img src="images/drunken-noodles.jpg" alt="Drunken Noodles">
+                            </div>
+                            <div class="menu-item-content">
+                                <div class="menu-item-top">
+                                    <h3 class="menu-item-title">Drunken Noodles</h3>
+                                    <div class="menu-item-price">$16</div>
+                                </div>
+                                <p class="menu-item-description">Wide rice noodles stir-fried with tofu, bell peppers, basil, and broccoli in a spicy garlic sauce.</p>
+                                <div class="menu-item-tags">
+                                    <span class="menu-tag spicy">Very Spicy</span>
+                                    <span class="menu-tag">Gluten-Free Option</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-category desserts" data-aos="fade-up" data-aos-delay="200">
+                    <div class="category-title">
+                        <h2>Desserts</h2>
+                    </div>
+                    
+                    <div class="menu-items">
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="100">
+                            <div class="menu-item-image">
+                                <img src="images/mango-sticky-rice.jpg" alt="Mango Sticky Rice">
+                            </div>
+                            <div class="menu-item-content">
+                                <div class="menu-item-top">
+                                    <h3 class="menu-item-title">Mango Sticky Rice</h3>
+                                    <div class="menu-item-price">$9</div>
+                                </div>
+                                <p class="menu-item-description">Sweet coconut sticky rice topped with fresh mango slices and toasted sesame seeds.</p>
+                                <div class="menu-item-tags">
+                                    <span class="menu-tag popular">Popular</span>
+                                    <span class="menu-tag">Gluten-Free</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="200">
+                            <div class="menu-item-image">
+                                <img src="images/coconut-banana.jpg" alt="Coconut Banana Fritters">
+                            </div>
+                            <div class="menu-item-content">
+                                <div class="menu-item-top">
+                                    <h3 class="menu-item-title">Coconut Banana Fritters</h3>
+                                    <div class="menu-item-price">$8</div>
+                                </div>
+                                <p class="menu-item-description">Crispy banana fritters coated in a coconut batter. Served with a scoop of vegan coconut ice cream.</p>
+                                <div class="menu-item-tags">
+                                    <span class="menu-tag">Gluten-Free Option</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-category drinks" data-aos="fade-up" data-aos-delay="200">
+                    <div class="category-title">
+                        <h2>Drinks</h2>
+                    </div>
+                    
+                    <div class="menu-items">
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="100">
+                            <div class="menu-item-image">
+                                <img src="images/thai-iced-tea.jpg" alt="Thai Iced Tea">
+                            </div>
+                            <div class="menu-item-content">
+                                <div class="menu-item-top">
+                                    <h3 class="menu-item-title">Thai Iced Tea</h3>
+                                    <div class="menu-item-price">$5</div>
+                                </div>
+                                <p class="menu-item-description">Traditional Thai tea with coconut milk, served over ice.</p>
+                                <div class="menu-item-tags">
+                                    <span class="menu-tag popular">Popular</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="200">
+                            <div class="menu-item-image">
+                                <img src="images/matcha-latte.jpg" alt="Matcha Latte">
+                            </div>
+                            <div class="menu-item-content">
+                                <div class="menu-item-top">
+                                    <h3 class="menu-item-title">Matcha Latte</h3>
+                                    <div class="menu-item-price">$6</div>
+                                </div>
+                                <p class="menu-item-description">Ceremonial grade matcha whisked with steamed oat milk. Available hot or iced.</p>
+                                <div class="menu-item-tags">
+                                    <span class="menu-tag">Caffeine</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="300">
+                            <div class="menu-item-image">
+                                <img src="images/lychee-lemonade.jpg" alt="Lychee Lemonade">
+                            </div>
+                            <div class="menu-item-content">
+                                <div class="menu-item-top">
+                                    <h3 class="menu-item-title">Lychee Lemonade</h3>
+                                    <div class="menu-item-price">$5</div>
+                                </div>
+                                <p class="menu-item-description">Fresh lemonade infused with lychee puree and mint leaves, served over ice.</p>
+                                <div class="menu-item-tags">
+                                    <span class="menu-tag">Refreshing</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-item" data-aos="fade-up" data-aos-delay="400">
+                            <div class="menu-item-image">
+                                <img src="images/ginger-tea.jpg" alt="Fresh Ginger Tea">
+                            </div>
+                            <div class="menu-item-content">
+                                <div class="menu-item-top">
+                                    <h3 class="menu-item-title">Fresh Ginger Tea</h3>
+                                    <div class="menu-item-price">$4</div>
+                                </div>
+                                <p class="menu-item-description">Freshly brewed tea with ginger, lemon, and a touch of agave nectar. Served hot or iced.</p>
+                                <div class="menu-item-tags">
+                                    <span class="menu-tag">Caffeine-Free</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>Time For Thyme</h3>
+                    <p>Asian-Inspired Vegan Cuisine</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="index.html#about">Our Story</a></li>
+                        <li><a href="index.html#sustainability">Sustainability</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                        <li><a href="tsa-webmaster.html">TSA Webmaster</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>Connect With Us</h4>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Time For Thyme. All Rights Reserved.</p>
+                <p class="tsa-note">TSA Webmaster Competition Entry</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top" aria-label="Back to top"><i class="fas fa-arrow-up"></i></a>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            mirror: false
+        });
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Header scroll class
+            const header = document.querySelector('.header');
+            
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+            
+            // Mobile navigation toggle
+            const mobileToggle = document.querySelector('.mobile-toggle');
+            const navList = document.querySelector('.nav-list');
+            
+            mobileToggle.addEventListener('click', function() {
+                this.classList.toggle('active');
+                navList.classList.toggle('active');
+                
+                // Transform hamburger to X
+                if (this.classList.contains('active')) {
+                    this.querySelector('span:nth-child(1)').style.transform = 'rotate(45deg) translate(5px, 5px)';
+                    this.querySelector('span:nth-child(2)').style.opacity = '0';
+                    this.querySelector('span:nth-child(3)').style.transform = 'rotate(-45deg) translate(7px, -6px)';
+                } else {
+                    this.querySelector('span:nth-child(1)').style.transform = 'none';
+                    this.querySelector('span:nth-child(2)').style.opacity = '1';
+                    this.querySelector('span:nth-child(3)').style.transform = 'none';
+                }
+            });
+            
+            // Back to top button
+            const backToTopButton = document.querySelector('.back-to-top');
+            
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 700) {
+                    backToTopButton.classList.add('show');
+                } else {
+                    backToTopButton.classList.remove('show');
+                }
+            });
+            
+            // Menu filtering
+            const menuFilters = document.querySelectorAll('.menu-filter');
+            const menuCategories = document.querySelectorAll('.menu-category');
+            
+            menuFilters.forEach(filter => {
+                filter.addEventListener('click', function() {
+                    // Remove active class from all filters
+                    menuFilters.forEach(f => f.classList.remove('active'));
+                    
+                    // Add active class to clicked filter
+                    this.classList.add('active');
+                    
+                    const category = this.getAttribute('data-category');
+                    
+                    if (category === 'all') {
+                        // Show all categories
+                        menuCategories.forEach(cat => {
+                            cat.style.display = 'block';
+                        });
+                    } else {
+                        // Hide all categories
+                        menuCategories.forEach(cat => {
+                            cat.style.display = 'none';
+                        });
+                        
+                        // Show selected category
+                        document.querySelector(`.menu-category.${category}`).style.display = 'block';
+                    }
+                    
+                    // Refresh AOS
+                    AOS.refresh();
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

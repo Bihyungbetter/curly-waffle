@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TSA Webmaster | Time For Thyme</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .tsa-section {
+            padding: 6rem 0;
+        }
+        
+        .tsa-section:nth-child(even) {
+            background-color: var(--gray-color);
+        }
+        
+        .tsa-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .tsa-tab-container {
+            margin-top: 3rem;
+        }
+        
+        .tsa-tabs {
+            display: flex;
+            justify-content: center;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+        }
+        
+        .tsa-tab {
+            padding: 1rem 2rem;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--dark-gray);
+            border-bottom: 3px solid transparent;
+            transition: var(--transition);
+        }
+        
+        .tsa-tab.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+        
+        .tsa-tab-content {
+            display: none;
+        }
+        
+        .tsa-tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        .work-log-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .work-log-table th, 
+        .work-log-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .work-log-table th {
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            font-weight: 500;
+        }
+        
+        .work-log-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .work-log-table tr:nth-child(even) {
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+        
+        .copyright-checklist {
+            margin-bottom: 2rem;
+        }
+        
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .checklist-item:last-child {
+            border-bottom: none;
+        }
+        
+        .checklist-icon {
+            color: var(--primary-color);
+            margin-right: 1rem;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .reference-list {
+            margin-bottom: 2rem;
+        }
+        
+        .reference-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .reference-item:last-child {
+            border-bottom: none;
+        }
+        
+        .reference-category {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .tsa-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .tsa-tab {
+                width: 100%;
+                text-align: center;
+                padding: 1rem;
+                border-bottom: 1px solid var(--border-color);
+            }
+            
+            .tsa-tab.active {
+                border-bottom: 1px solid var(--border-color);
+                background-color: var(--primary-color);
+                color: var(--light-color);
+            }
+            
+            .work-log-table {
+                font-size: 0.9rem;
+            }
+            
+            .work-log-table th, 
+            .work-log-table td {
+                padding: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">Time For Thyme</a>
+                </div>
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a href="index.html#menu" class="nav-link">Menu</a></li>
+                        <li class="nav-item"><a href="index.html#about" class="nav-link">Our Story</a></li>
+                        <li class="nav-item"><a href="index.html#sustainability" class="nav-link">Sustainability</a></li>
+                        <li class="nav-item"><a href="index.html#contact" class="nav-link">Contact</a></li>
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link active">TSA Webmaster <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#work-log">Work Log</a></li>
+                                <li><a href="#copyright">Student Copyright Checklist</a></li>
+                                <li><a href="#reference">Reference Page</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="mobile-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="tsa-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">TSA Webmaster Competition</h2>
+                    <div class="section-divider"></div>
+                    <p class="section-subtitle">Time For Thyme Restaurant Website Project</p>
+                </div>
+                
+                <div class="tsa-content">
+                    <div class="tsa-tab-container">
+                        <div class="tsa-tabs">
+                            <div class="tsa-tab active" data-tab="work-log">Work Log</div>
+                            <div class="tsa-tab" data-tab="copyright">Copyright Checklist</div>
+                            <div class="tsa-tab" data-tab="reference">Reference Page</div>
+                        </div>
+                        
+                        <div class="tsa-tab-content active" id="work-log">
+                            <h3>Team Work Log</h3>
+                            <p>This log documents the development process of the Time For Thyme website project.</p>
+                            
+                            <table class="work-log-table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Team Member</th>
+                                        <th>Task Completed</th>
+                                        <th>Hours</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>January 5, 2025</td>
+                                        <td>Team</td>
+                                        <td>Initial planning meeting and brainstorming</td>
+                                        <td>3</td>
+                                    </tr>
+                                    <tr>
+                                        <td>January 10, 2025</td>
+                                        <td>Member 1</td>
+                                        <td>Design mockups and UI planning</td>
+                                        <td>4</td>
+                                    </tr>
+                                    <tr>
+                                        <td>January 12, 2025</td>
+                                        <td>Member 2</td>
+                                        <td>Content research and copywriting</td>
+                                        <td>3</td>
+                                    </tr>
+                                    <tr>
+                                        <td>January 15, 2025</td>
+                                        <td>Member 3</td>
+                                        <td>Site structure and wireframing</td>
+                                        <td>3.5</td>
+                                    </tr>
+                                    <tr>
+                                        <td>January 20, 2025</td>
+                                        <td>Member 1</td>
+                                        <td>HTML structure implementation</td>
+                                        <td>5</td>
+                                    </tr>
+                                    <tr>
+                                        <td>January 22, 2025</td>
+                                        <td>Member 2</td>
+                                        <td>CSS styling and animations</td>
+                                        <td>6</td>
+                                    </tr>
+                                    <tr>
+                                        <td>January 25, 2025</td>
+                                        <td>Member 3</td>
+                                        <td>JavaScript functionality</td>
+                                        <td>4</td>
+                                    </tr>
+                                    <tr>
+                                        <td>January 28, 2025</td>
+                                        <td>Team</td>
+                                        <td>Testing and refinement</td>
+                                        <td>4</td>
+                                    </tr>
+                                    <tr>
+                                        <td>February 1, 2025</td>
+                                        <td>Member 1</td>
+                                        <td>Responsive design implementation</td>
+                                        <td>3</td>
+                                    </tr>
+                                    <tr>
+                                        <td>February 3, 2025</td>
+                                        <td>Member 2</td>
+                                        <td>Accessibility improvements</td>
+                                        <td>2</td>
+                                    </tr>
+                                    <tr>
+                                        <td>February 5, 2025</td>
+                                        <td>Member 3</td>
+                                        <td>Performance optimization</td>
+                                        <td>3</td>
+                                    </tr>
+                                    <tr>
+                                        <td>February 10, 2025</td>
+                                        <td>Team</td>
+                                        <td>Final review and submission preparation</td>
+                                        <td>4</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                            <p>Total Hours: 44.5</p>
+                        </div>
+                        
+                        <div class="tsa-tab-content" id="copyright">
+                            <h3>Student Copyright Checklist</h3>
+                            <p>This checklist documents our adherence to copyright laws and proper attribution of resources used.</p>
+                            
+                            <div class="copyright-checklist">
+                                <div class="checklist-item">
+                                    <div class="checklist-icon">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <div class="checklist-content">
+                                        <h4>Images and Graphics</h4>
+                                        <p>All images used on the website are either original creations, licensed through appropriate channels, or sourced from royalty-free image libraries. Each image is properly credited in the site's source code.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="checklist-item">
+                                    <div class="checklist-icon">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <div class="checklist-content">
+                                        <h4>Fonts and Typography</h4>
+                                        <p>All fonts used are sourced from Google Fonts, which are free for commercial use. Font Awesome icons are used under their free license terms.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="checklist-item">
+                                    <div class="checklist-icon">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <div class="checklist-content">
+                                        <h4>Content and Copy</h4>
+                                        <p>All written content is original and created specifically for this project. Menu items and descriptions are fictional and created by our team.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="checklist-item">
+                                    <div class="checklist-icon">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <div class="checklist-content">
+                                        <h4>Code and Libraries</h4>
+                                        <p>The website uses AOS (Animate On Scroll) library, which is open-source and used in accordance with its MIT license. All custom code was written by our team members.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="checklist-item">
+                                    <div class="checklist-icon">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <div class="checklist-content">
+                                        <h4>Design Elements</h4>
+                                        <p>UI design patterns and layouts are inspired by industry standards but implemented uniquely for this project. No templates or pre-made designs were used.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <p><strong>Declaration:</strong> We hereby confirm that all content, code, images, and other resources used in this website adhere to copyright laws and are properly attributed where required.</p>
+                        </div>
+                        
+                        <div class="tsa-tab-content" id="reference">
+                            <h3>Reference Page</h3>
+                            <p>The following resources were referenced or used during the development of this website.</p>
+                            
+                            <div class="reference-list">
+                                <div class="reference-item">
+                                    <div class="reference-category">Libraries & Frameworks</div>
+                                    <p>AOS - Animate On Scroll Library. (2023). <a href="https://michalsnik.github.io/aos/">https://michalsnik.github.io/aos/</a></p>
+                                    <p>Font Awesome. (2023). <a href="https://fontawesome.com/">https://fontawesome.com/</a></p>
+                                    <p>Google Fonts. (2023). <a href="https://fonts.google.com/">https://fonts.google.com/</a></p>
+                                </div>
+                                
+                                <div class="reference-item">
+                                    <div class="reference-category">Documentation & Tutorials</div>
+                                    <p>MDN Web Docs. (2023). <a href="https://developer.mozilla.org/">https://developer.mozilla.org/</a></p>
+                                    <p>CSS-Tricks. (2023). A Complete Guide to Flexbox. <a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/">https://css-tricks.com/snippets/css/a-guide-to-flexbox/</a></p>
+                                    <p>W3Schools. (2023). <a href="https://www.w3schools.com/">https://www.w3schools.com/</a></p>
+                                </div>
+                                
+                                <div class="reference-item">
+                                    <div class="reference-category">Design Inspiration</div>
+                                    <p>Dribbble. (2023). <a href="https://dribbble.com/">https://dribbble.com/</a></p>
+                                    <p>Awwwards. (2023). <a href="https://www.awwwards.com/">https://www.awwwards.com/</a></p>
+                                    <p>Behance. (2023). <a href="https://www.behance.net/">https://www.behance.net/</a></p>
+                                </div>
+                                
+                                <div class="reference-item">
+                                    <div class="reference-category">Tools</div>
+                                    <p>VS Code - Code Editor. (2023). <a href="https://code.visualstudio.com/">https://code.visualstudio.com/</a></p>
+                                    <p>Chrome DevTools. (2023). <a href="https://developer.chrome.com/docs/devtools/">https://developer.chrome.com/docs/devtools/</a></p>
+                                    <p>WAVE Web Accessibility Evaluation Tool. (2023). <a href="https://wave.webaim.org/">https://wave.webaim.org/</a></p>
+                                </div>
+                                
+                                <div class="reference-item">
+                                    <div class="reference-category">Image Resources</div>
+                                    <p>Unsplash. (2023). <a href="https://unsplash.com/">https://unsplash.com/</a></p>
+                                    <p>Pexels. (2023). <a href="https://www.pexels.com/">https://www.pexels.com/</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>Time For Thyme</h3>
+                    <p>Asian-Inspired Vegan Cuisine</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#menu">Menu</a></li>
+                        <li><a href="index.html#about">Our Story</a></li>
+                        <li><a href="index.html#sustainability">Sustainability</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>Connect With Us</h4>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Time For Thyme. All Rights Reserved.</p>
+                <p class="tsa-note">TSA Webmaster Competition Entry</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top" aria-label="Back to top"><i class="fas fa-arrow-up"></i></a>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab functionality
+            const tabs = document.querySelectorAll('.tsa-tab');
+            const tabContents = document.querySelectorAll('.tsa-tab-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabId = tab.getAttribute('data-tab');
+                    
+                    // Remove active class from all tabs and contents
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked tab and corresponding content
+                    tab.classList.add('active');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Header scroll class
+            const header = document.querySelector('.header');
+            
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+            
+            // Mobile navigation toggle
+            const mobileToggle = document.querySelector('.mobile-toggle');
+            const navList = document.querySelector('.nav-list');
+            
+            mobileToggle.addEventListener('click', function() {
+                this.classList.toggle('active');
+                navList.classList.toggle('active');
+                
+                // Transform hamburger to X
+                if (this.classList.contains('active')) {
+                    this.querySelector('span:nth-child(1)').style.transform = 'rotate(45deg) translate(5px, 5px)';
+                    this.querySelector('span:nth-child(2)').style.opacity = '0';
+                    this.querySelector('span:nth-child(3)').style.transform = 'rotate(-45deg) translate(7px, -6px)';
+                } else {
+                    this.querySelector('span:nth-child(1)').style.transform = 'none';
+                    this.querySelector('span:nth-child(2)').style.opacity = '1';
+                    this.querySelector('span:nth-child(3)').style.transform = 'none';
+                }
+            });
+            
+            // Back to top functionality
+            const backToTopButton = document.querySelector('.back-to-top');
+            
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 700) {
+                    backToTopButton.classList.add('show');
+                } else {
+                    backToTopButton.classList.remove('show');
+                }
+            });
+            
+            backToTopButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
