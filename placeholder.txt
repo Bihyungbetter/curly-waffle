@@ -1,0 +1,16 @@
+Required images for the Time For Thyme website:
+
+1. hero-bg.jpg - A beautiful image of a vegan Asian meal or restaurant interior
+2. restaurant-interior.jpg - Interior shot of the restaurant
+3. dish1.jpg - Image of Lemongrass Tofu Stir-Fry
+4. dish2.jpg - Image of Coconut Green Curry
+5. dish3.jpg - Image of Mushroom Dumplings
+6. sustainability.jpg - Image representing farm-to-table or sustainable farming
+
+Note: Please replace this file with actual images. For optimal performance, it's recommended to use optimized JPG or WebP images with the following sizes:
+
+- Hero background: 1920px × 1080px
+- Dish images: 600px × D400px 
+- Restaurant interior and sustainability images: 800px × 600px
+
+All images should be properly credited and have appropriate licensing for commercial use. 
